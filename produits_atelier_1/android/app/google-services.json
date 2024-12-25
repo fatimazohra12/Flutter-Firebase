@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1041136925927",
+    "project_id": "atelier4-fz-amejoud-iir5g6",
+    "storage_bucket": "atelier4-fz-amejoud-iir5g6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041136925927:android:fd67b5a1258d919b7df642",
+        "android_client_info": {
+          "package_name": "com.example.produits_atelier_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa46hhriewU8wpsJ0sYR0fASsuLkf4GFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041136925927:android:675ddeeae23dfc017df642",
+        "android_client_info": {
+          "package_name": "com.f"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa46hhriewU8wpsJ0sYR0fASsuLkf4GFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
