@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'produit_box.dart';
-// import 'add_produit.dart';
 import 'product.dart';
 
 class ProduitsList extends StatefulWidget {
@@ -11,14 +8,18 @@ class ProduitsList extends StatefulWidget {
 }
 
 class _ProduitsListState extends State<ProduitsList> {
-
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Liste des Produits'),
+        title: Text(
+          'Liste des Produits',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.teal,
         actions: [
           IconButton(
             icon: Icon(Icons.add),
@@ -28,7 +29,6 @@ class _ProduitsListState extends State<ProduitsList> {
                 'designation': "Superstar",
                 'categorie': 'chaussures',
                 'prix': 70,
-                'photoUrl': "",
                 'quantite': 200,
               });
             },
@@ -36,7 +36,7 @@ class _ProduitsListState extends State<ProduitsList> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              //db.collection("produits").doc()
+              // Implement delete functionality here
             },
           ),
         ],
@@ -58,9 +58,16 @@ class _ProduitsListState extends State<ProduitsList> {
             return Produit.fromFirestore(doc);
           }).toList();
 
-          return ListView.builder(
+          return GridView.builder(
+            padding: EdgeInsets.all(8.0),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 2 / 3,
+            ),
             itemCount: produits.length,
-            itemBuilder: (context, index) => ProduitItem(
+            itemBuilder: (context, index) => ProduitCard(
               produit: produits[index],
             ),
           );
@@ -70,19 +77,49 @@ class _ProduitsListState extends State<ProduitsList> {
   }
 }
 
+class ProduitCard extends StatelessWidget {
+  const ProduitCard({Key? key, required this.produit}) : super(key: key);
 
+  final Produit produit;
 
-class ProduitItem extends StatelessWidget {
-    ProduitItem({Key? key, required this.produit}) : super(key: key);
-
-    final Produit produit;
-
-    @override
-    Widget build(BuildContext context) {
-        return ListTile(
-            title: Text(produit.designation),
-            subtitle: Text(produit.marque),
-            trailing: Text('${produit.prix} €'),
-        );
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              produit.designation,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+            SizedBox(height: 4.0),
+            Text(
+              produit.marque,
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 14.0,
+              ),
+            ),
+            SizedBox(height: 4.0),
+            Text(
+              '${produit.prix} €',
+              style: TextStyle(
+                color: Colors.teal,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
